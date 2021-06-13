@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="/image/logo/favicon.ico" />
+    <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/libs/font-awsome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/page.css" />
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet">
+    <!-- Flaticon Font -->
+    <link href="/libs/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/libs/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/libs/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/error.css">
+    <script src="/libs/jquery-3.6.0.min.js"></script>
+    <title><%= error.name %> </title>
+</head>
+<body>
+    <%- body  %> 
+    <script>
+        $(document).ready(function () {
+            $('button').on('click',function(){
+                window.history.back();
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{
+  "name": "DangHoat",
+  "version": "1.0.0",
+  "description": "Server demo của Mon",
+  "main": "www/index.js",
+  "repository": "https://github.com/DangXuanHoat/demoNodejs.git",
+  "author": "Dang Xuan Hoat",
+  "type": "module",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "runDev": "nodemon www/index.js"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "@elastic/elasticsearch": "^7.13.0",
+    "amqplib": "^0.8.0",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "express-session": "^1.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.4.17",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.1.0",
+    "socket.io": "^3.1.2",
+    "typeorm": "^0.2.31",
+    "web-push": "^3.4.4"
+  }
+}
