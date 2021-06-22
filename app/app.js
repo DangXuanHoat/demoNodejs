@@ -29,7 +29,7 @@ app.use('/uploads', express.static(process.env.PATHFILE));
 //config request
 app.use(express.json())
 // for parsing application/json
-app.use(bodyParser.json());
+app.use(bodyParser.json()); 
 // for parsing application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // for parsing multipart/form-data

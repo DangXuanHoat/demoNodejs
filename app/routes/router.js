@@ -25,7 +25,6 @@ export default class Router{
             let link = item.replace('./app/routes', "")
             try {
                 let r = link.split('.')
-                debug(r,"Convert route")
                 if(r[2]!='js'){
                     this.app.use(`${prefix+r[1]}`,(await import(link)).default)
                     this.listRoute.push(prefix+r[1])

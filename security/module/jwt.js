@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken')
-const secretSignature = process.env.SECRET || ""
+import jwt from 'jsonwebtoken'
+const secretSignature = process.env.KEY_JWT || ""
 const tokenLife = process.env.LIFETOKEN || 3600
 export function createJwt(data){
     return new Promise((resolve,reject)=>{

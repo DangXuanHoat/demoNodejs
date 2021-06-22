@@ -17,24 +17,24 @@ const FgMagenta = "\x1b[35m%s"
 const FgCyan = "\x1b[36m%s"
 const FgWhite = "\x1b[37m%s"
 const logpath =  process.env.LOG || ""
-const logMessage = process.env.LOVE
+const logMessage = process.env.APP_NAME
 export const write = (data) =>{
 
 }
-export const debug = (value,tag=`{${logMessage}}`)=>{
+export const debug = (value,tag=`${process.env.APP_NAME}`)=>{
     console.log(FgGreen,"[DEBUG]",`{${tag}}`,value)
     console.log(Reset)
 }
 
-export const warn = (value,tag=`{${logMessage}}`)=>{
+export const warn = (value,tag=`${process.env.APP_NAME}`)=>{
     console.log(FgYellow,"[WARN]",`{${tag}}`,value)
     console.log(Reset)
 }
-export const info = (value,tag=`{${logMessage}}`) =>{
+export const info = (value,tag=`${process.env.APP_NAME}`) =>{
     console.log(FgMagenta,"[INFO]",`{${tag}}`,value)
     console.log(Reset)
 }
-export const error = (value,tag=`{${logMessage}}`)=>{
+export const error = (value,tag=`${process.env.APP_NAME}`)=>{
     console.log(FgRed,"[ERROR]",`{${tag}}`,value)
     console.log(Reset)
 }
