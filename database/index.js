@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import typeorm,{createConnection} from 'typeorm'
+import typeorm,{createConnection,Connection,ConnectionManager} from 'typeorm'
 import mongoose from 'mongoose'
 
 export default class Database{
@@ -14,6 +14,9 @@ export default class Database{
         this.DB_TABLE  = process.env.DB_TABLE 
     }
     async connect(){
+        if(process.env.MANY_CONNECT.toLowerCase() == "true"){
+
+        }
         switch(this.DB){
             case typeDB.mongodb.toString():
                 const uri = this.DB_CONNECT
@@ -35,31 +38,33 @@ export default class Database{
                 })
                 break
             default:
-                await createConnection({
-                    type: this.DB_TYPE,
-                    host: this.DB_HOST,
-                    port: 3306,
-                    username: this.DB_USERNAME,
-                    password: this.DB_PASSWORD,
-                    database: this.DB_DATABASE,
-                    entities: [
+                const connectionManager = new ConnectionManager();
+                this.connection = await createConnection({
+                    "type": this.DB_TYPE,
+                    "host": this.DB_HOST,
+                    "port": 3306,
+                    "username": this.DB_USERNAME,
+                    "password": this.DB_PASSWORD,
+                    "database": this.DB_DATABASE,
+                    "entities": [
                         './entity/*.js'
                     ],
-                    synchronize: true,
-                    logging: false
+                    "migrationsTableName": "user", 
+                    "migrations": ["migrations/*.js"], 
+                    "cli": { 
+                        "migrationsDir": "migrations",
+                    },
+                    "synchronize": true,
+                    "logging": false
                 }).then(connection => {
                     info(typeDB['mysql'].toString())
                     info(`Open connect database '${process.env.DB_USERNAME}' type '${process.env.DB_TYPE}'  at : ${new Date(Date.now()).toUTCString()}`)
                 }).catch(e => {
-                    error(e.sqlMessage)
+                    error(e.sqlMessage,"Database connect!")
                     process.exit(1);
                 });
-                
-                break
+                break;
         }
-    }
-    seed(){
-
     }
     migrations(){
 

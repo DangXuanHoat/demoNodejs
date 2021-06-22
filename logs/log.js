@@ -22,19 +22,19 @@ export const write = (data) =>{
 
 }
 export const debug = (value,tag=`${process.env.APP_NAME}`)=>{
-    console.log(FgGreen,"[DEBUG]",`{${tag}}`,value)
+    console.log(FgGreen,"[DEBUG]",`[${tag}]`,value)
     console.log(Reset)
 }
 
 export const warn = (value,tag=`${process.env.APP_NAME}`)=>{
-    console.log(FgYellow,"[WARN]",`{${tag}}`,value)
+    console.log(FgYellow,"[WARN]",`[${tag}]`,value)
     console.log(Reset)
 }
 export const info = (value,tag=`${process.env.APP_NAME}`) =>{
-    console.log(FgMagenta,"[INFO]",`{${tag}}`,value)
+    console.log(FgMagenta,"[INFO]",`[${tag}]`,value)
     console.log(Reset)
 }
 export const error = (value,tag=`${process.env.APP_NAME}`)=>{
-    console.log(FgRed,"[ERROR]",`{${tag}}`,value)
+    console.log(FgRed,"[ERROR]",`[${tag}]`,value)
     console.log(Reset)
 }

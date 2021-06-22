@@ -9,7 +9,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "runDev": "nodemon www/index.js"
+    "runDev": "nodemon www/index.js",
+    "init": "npm install && cp .env.exam .env"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
