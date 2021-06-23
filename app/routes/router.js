@@ -33,8 +33,8 @@ export default class Router{
                 }
                 
                 //
-            } catch (error) {
-               warn(error,link)
+            } catch (e) {
+               error(e,link)
             }
         }
     }
