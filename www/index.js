@@ -8,9 +8,10 @@ const server = http.createServer(app)
 
 let socket  = new Socket(server)
 let router = new Router(app)
-global.DB = new Database()
+let DB = new Database()
 await DB.initEntites()
 await DB.connect()
+
 passport_config(app)
 await router.build(process.env.PREFIX)
 await router.defaultErrorAPI()

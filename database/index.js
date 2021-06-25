@@ -6,6 +6,9 @@ import mongoose from "mongoose";
 const TAG = "Database";
 export default class Database {
   constructor() {
+    if (!!Database.instance) {
+      return Database.instance;
+  }
     this.DB_TYPE = typeDB[process.env.DB_TYPE].toString() || "mysql";
     this.DB_HOST = process.env.DB_HOST || "localhost";
     this.DB_PORT = process.env.DB_PORT || 3306;
@@ -14,6 +17,9 @@ export default class Database {
     this.DB_PASSWORD = process.env.DB_PASSWORD || "";
     this.DB_CONNECT = process.env.DB_CONNECT;
     this.DB_TABLE = process.env.DB_TABLE;
+    this.connected = false
+    Database.instance =  this
+    return this
   }
   async initEntites(){
     this.entities =  new Array()
@@ -46,6 +52,7 @@ export default class Database {
           mongoose.connect(uri, options);
           let db = mongoose.connection;
           db.on("error", (err) => {
+            this.connected = false
             console.log(err);
           });
           db.once("open", () => {
@@ -83,18 +90,26 @@ export default class Database {
               }'  at : ${new Date(Date.now()).toUTCString()}`
             );
           } catch (e) {
+            this.connected = false
             error(e, "Database connect!");
           }
           break;
       }
     } catch (e) {
+      this.connected = false
       error(e, TAG);
     }
+    this.connected = true
   }
   migrations() {
 
   }
-  getConnectionManager() {
+  async getConnectionManager() {
+    if(!this.connected){
+      await this.initEntites()
+      await this.connect()
+      return this.connectionManager;
+    }
     return this.connectionManager;
   }
 }

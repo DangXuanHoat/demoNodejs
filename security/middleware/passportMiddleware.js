@@ -8,4 +8,4 @@ export function destroy(request, response){
     req.session.destroy(function(err) {
         return response.redirect('/page')
     })
-}s
+}
