@@ -5,12 +5,13 @@ import Database from '../database/index.js'
 import passport_config from '../security/module/passport.js'
 import Socket from '../service/socket/socket.js'
 const server = http.createServer(app)
-passport_config(app)
+
 let socket  = new Socket(server)
 let router = new Router(app)
 global.DB = new Database()
 await DB.initEntites()
 await DB.connect()
+passport_config(app)
 await router.build(process.env.PREFIX)
 await router.defaultErrorAPI()
 await router.defaultErrorWeb()

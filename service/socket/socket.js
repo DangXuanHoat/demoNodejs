@@ -12,21 +12,22 @@ export default class Socket{
         Socket.instance = this;
         return this;
     }
-    addOn(){
+    async addOn(){
 
     }
-    addEmit(socket, event,callback){
+    async addEmit(socket, event,callback){
 
     }
-    addBroadCast(socket,room,){
+    async addBroadCast(socket,room,){
 
     }
     getSocket(){
 
     }
-    buildSocket(){
+    async buildSocket(){
         const io =  this.IO
         io.on('connection',socket=>{
+            
             socket.on('disconnect',()=>{
                 info(`socket : ${socket.id} đã ngắt kết nối!`,TAG)
             })
