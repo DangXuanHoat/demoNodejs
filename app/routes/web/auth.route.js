@@ -1,8 +1,8 @@
 import express from 'express'
 const routers = express.Router()
 const dbConnect = DB.getConnectionManager().get()
-
 import User from '../../../database/model/User.js'
+
 routers.get('/',(req,res)=>{
   
    return res.render("page/auth",{

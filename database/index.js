@@ -6,8 +6,6 @@ import mongoose from "mongoose";
 const TAG = "Database";
 export default class Database {
   constructor() {
-
-    info(getEntitys(),"log entities")
     this.DB_TYPE = typeDB[process.env.DB_TYPE].toString() || "mysql";
     this.DB_HOST = process.env.DB_HOST || "localhost";
     this.DB_PORT = process.env.DB_PORT || 3306;
@@ -16,6 +14,19 @@ export default class Database {
     this.DB_PASSWORD = process.env.DB_PASSWORD || "";
     this.DB_CONNECT = process.env.DB_CONNECT;
     this.DB_TABLE = process.env.DB_TABLE;
+  }
+  async initEntites(){
+    this.entities =  new Array()
+    let files = fs.readdirSync("./database/entity/");
+    for (var i in files) {
+      try {
+        this.entities.push((await import(`./entity/${files[i]}`)).default);
+      } catch (e) {
+        error(e,"initEntites")
+        info(files[i],'initEntites')
+      }
+    }
+    return this;
   }
   async connect() {
     try {
@@ -55,7 +66,7 @@ export default class Database {
               username: this.DB_USERNAME,
               password: this.DB_PASSWORD,
               database: this.DB_DATABASE,
-              entities: [await getEntitys()],
+              entities: this.entities,
               migrationsTableName: "user",
               migrations: ["migrations/*.js"],
               cli: {
@@ -80,23 +91,14 @@ export default class Database {
       error(e, TAG);
     }
   }
-  migrations() {}
+  migrations() {
+
+  }
   getConnectionManager() {
     return this.connectionManager;
   }
 }
 const enumValue = (name) => Object.freeze({ toString: () => name });
-const getEntitys = async () => {
-  const entities = [];
-  let files = fs.readdirSync("./database/entity/");
-  for (var i in files) {
-    try {
-      entities.push(await(await import(`./entity/${files[i]}`)).default);
-    } catch (e) {}
-  }
-  console.log(entities[0])
-  return entities;
-};
 export const typeDB = Object.freeze({
   mysql: enumValue("mysql"),
   pg: enumValue("postgres"),
