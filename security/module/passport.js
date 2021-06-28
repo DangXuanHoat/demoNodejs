@@ -8,6 +8,9 @@ import Database from '../../database/index.js'
 
 function initialize(passport) {
     const authenticateUser = async (username, password, done) => {
+      error(username,"initialize")
+      error(password,'initialize')
+    error(username, password)
       const user = await getUserByUsernameOrEmail(username)
       if (isEmpty(user)) {
         return done(null, false, { message: 'No user !' })
@@ -36,6 +39,7 @@ function initialize(passport) {
   }
 
   const getUserByUsernameOrEmail =async (usernameOrEmail)=>{
+
     let DB = new Database()
     let connectionManager =  await DB.getConnectionManager()
     let responsitory =  connectionManager.get().getRepository("User")
@@ -52,7 +56,6 @@ function initialize(passport) {
     return user
   }
   export default function passportConfig (app){
-    let DB = new Database()
     initialize(passport)
     app.use(passport.initialize())
     app.use(passport.session())

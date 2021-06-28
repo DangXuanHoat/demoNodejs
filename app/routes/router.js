@@ -25,6 +25,7 @@ export default class Router{
             let link = item.replace('./app/routes', "")
             try {
                 let r = link.split('.')
+                error(r)
                 if(r[2]!='js'){
                     this.app.use(`${prefix+r[1]}`,(await import(link)).default)
                     this.listRoute.push(prefix+r[1])
@@ -71,15 +72,24 @@ export default class Router{
               })
         })
     }
+    getWebPrefix (){
+        return this.webPrefix ||""
+    }
     async defaultErrorWeb(data){
-        this.app.use(`${process.env.PREFIX}/web/*`,(req,res)=>{
-            return res.render("page/error",{
-                layout: "layouts/error-layout",
-                error: {
-                    code: "404",
-                    title: "Oops, Page you are looking for is not found",
-                  }
-            });
+        this.webPrefix = `${process.env.PREFIX}/web`
+        this.app.use(`${this.webPrefix}/*`,(req,res)=>{
+            try {
+                return res.render("page/error",{
+                    layout: "layouts/error-layout",
+                    error: {
+                        code: "404",
+                        title: "Trang không tồn tại!",
+                      }
+                });
+            } catch (error) {
+                return res.render("<p>Trang không tồn tại!</p>");   
+            }
+            
         })
     }
 }

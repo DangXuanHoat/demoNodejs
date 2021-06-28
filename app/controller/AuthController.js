@@ -2,6 +2,7 @@
 import * as tools from "../../utils/tools.js";
 import { isEmpty, isSpecialCharacter } from "../../utils/validInput.js";
 import bcrypt from "bcrypt";
+
 import DB from "../../database/index.js";
 import User from "../../database/model/User.js";
 
